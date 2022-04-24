@@ -40,6 +40,14 @@ config :hey_cake, Oban,
   plugins: [Oban.Plugins.Pruner],
   queues: [slack: 1]
 
+config :esbuild,
+  version: "0.14.38",
+  default: [
+    args: ~w(js/app.js --bundle --target=es2016 --outdir=../priv/static/assets),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
+
 if File.exists?("config/#{Mix.env()}.exs") do
   import_config "#{Mix.env()}.exs"
 end

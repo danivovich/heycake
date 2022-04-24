@@ -36,22 +36,25 @@ defmodule HeyCake.MixProject do
       {:bamboo, "~> 2.0"},
       {:bamboo_phoenix, "~> 1.0"},
       {:credo, "~> 1.1", only: [:dev, :test]},
-      {:ecto_sql, "~> 3.1"},
+      {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:gettext, "~> 0.11"},
       {:mojito, "~> 0.6"},
       {:jason, "~> 1.0"},
       {:logster, "~> 1.0"},
-      {:phoenix, "~> 1.4"},
-      {:phoenix_ecto, "~> 4.0"},
-      {:phoenix_html, "~> 2.11"},
+      {:phoenix, "~> 1.6.7"},
+      {:phoenix_html, "~> 3.0"},
+      {:phoenix_live_view, "~> 0.16.4"},
+      {:phoenix_live_dashboard, "~> 0.5"},
+      {:telemetry_metrics, "~> 0.6"},
+      {:telemetry_poller, "~> 0.5"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_pubsub, "~> 2.0"},
-      {:plug_cowboy, "~> 2.0"},
+      {:plug_cowboy, "~> 2.1"},
       {:porcelain, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
       {:oban, "~> 2.7"},
       {:stein, "~> 0.5"},
-      {:stein_phoenix, "~> 0.1"},
+      {:stein_phoenix, github: "smartlogic/stein_phoenix", branch: "phoenix_html_3"},
       {:ueberauth_slack, "~> 0.6"},
       {:vapor, "~> 0.8"}
     ]
@@ -68,7 +71,12 @@ defmodule HeyCake.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       "ecto.migrate.reset": ["ecto.drop", "ecto.create", "ecto.migrate"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      "assets.deploy": [
+        "cmd --cd assets npm run deploy",
+        "esbuild default --minify",
+        "phx.digest"
+      ]
     ]
   end
 end

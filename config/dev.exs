@@ -14,13 +14,15 @@ config :hey_cake, Web.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [
-    #    node: [
-    #      "node_modules/webpack/bin/webpack.js",
-    #      "--mode",
-    #      "development",
-    #      "--watch-options-stdin",
-    #      cd: Path.expand("../assets", __DIR__)
-    #    ]
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    npx: [
+      "tailwindcss",
+      "--input=css/app.css",
+      "--output=../priv/static/assets/app.css",
+      "--postcss",
+      "--watch",
+      cd: Path.expand("../assets", __DIR__)
+    ]
   ]
 
 # ## SSL Support
