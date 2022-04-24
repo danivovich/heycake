@@ -1,6 +1,8 @@
 import Config
 
-config :hey_cake, HeyCake.Repo, ssl: true
+config :hey_cake, HeyCake.Repo,
+  socket_options: [:inet6],
+  ssl: false
 
 config :hey_cake, Web.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
