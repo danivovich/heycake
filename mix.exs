@@ -42,6 +42,7 @@ defmodule HeyCake.MixProject do
       {:jason, "~> 1.0"},
       {:logster, "~> 1.0"},
       {:phoenix, "~> 1.6.7"},
+      {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_view, "~> 0.16.4"},
       {:phoenix_live_dashboard, "~> 0.5"},

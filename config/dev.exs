@@ -15,12 +15,10 @@ config :hey_cake, Web.Endpoint,
   check_origin: false,
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
-    npx: [
-      "tailwindcss",
-      "--input=css/app.css",
-      "--output=../priv/static/assets/app.css",
-      "--postcss",
-      "--watch",
+    sh: [
+      "yarn",
+      "run",
+      "watch",
       cd: Path.expand("../assets", __DIR__)
     ]
   ]

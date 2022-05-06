@@ -2,7 +2,8 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "deploy": "NODE_ENV=production npx tailwindcss --postcss --minify --input=css/app.scss --output=../priv/static/assets/app.css"
+    "watch": "NODE_ENV=development npx tailwindcss --watch --postcss --input=css/app.scss --output=../priv/static/assets/app.css",
+    "deploy": "NODE_ENV=production npx tailwindcss --minify --postcss --input=css/app.scss --output=../priv/static/assets/app.css"
   },
   "dependencies": {
     "emoji-js": "^3.5.0",
